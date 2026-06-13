@@ -10,8 +10,8 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, LessThan } from "typeorm";
 import { randomBytes, createHash } from "crypto";
-import { Wallet, WalletStatus, WalletType } from "../core/auth/entities/wallet.entity";
-import { User } from "../core/user/entities/user.entity";
+import { Wallet, WalletStatus, WalletType } from "./entities/wallet.entity";
+import { User } from "../user/entities/user.entity";
 
 export interface DelegationRequest {
   delegatorWalletId: string;

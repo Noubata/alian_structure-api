@@ -13,12 +13,11 @@ import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import * as speakeasy from "speakeasy";
 import * as qrcode from "qrcode";
-import { User } from "../core/user/entities/user.entity";
-import { RefreshToken, TwoFactorAuth, TwoFactorStatus, TwoFactorType } from "../core/auth/entities/auth.entity";
-import { EmailService } from "../core/auth/email.service";
-import { LoginDto, RefreshTokenDto, RegisterDto, TwoFactorVerifyDto } from "../core/auth/dto/auth.dto";
-import { TwoFactorSetupDto } from "../core/auth/dto/kyc.dto";
-
+import { EmailService } from "./email.service";
+import { User } from "../../core/user/entities/user.entity";
+import { RefreshToken, TwoFactorAuth, TwoFactorType, TwoFactorStatus } from "./entities/auth.entity";
+import { LoginDto, RegisterDto, RefreshTokenDto, TwoFactorVerifyDto } from "./dto/auth.dto";
+import { TwoFactorSetupDto } from "./dto/kyc.dto";
 
 @Injectable()
 export class EnhancedAuthService {

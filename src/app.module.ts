@@ -7,56 +7,66 @@ import { ThrottlerModule } from "@nestjs/throttler";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 
-// Modules
-import { AuthModule } from "./auth/auth.module";
-import { UserModule } from "./user/user.module";
-import { ProfileModule } from "./profile/profile.module";
-import { AuditModule } from "./audit/audit.module";
-import { OracleModule } from "./oracle/oracle.module";
-import { PortfolioModule } from "./portfolio/portfolio.module";
-import { RiskManagementModule } from "./risk-management/risk-management.module";
-import { DeFiModule } from "./defi/defi.module";
-import { AlertsModule } from "./alerts/alerts.module";
+// Modules – core
+import { AuthModule } from "./core/auth/auth.module";
+import { UserModule } from "./core/user/user.module";
+import { ProfileModule } from "./core/profile/profile.module";
+
+// Modules – infrastructure
+import { AuditModule } from "./infrastructure/audit/audit.module";
+
+// Modules – blockchain
+import { OracleModule } from "./blockchain/oracle/oracle.module";
+
+// Modules – investment
+import { PortfolioModule } from "./investment/portfolio/portfolio.module";
+import { RiskManagementModule } from "./investment/risk-management/risk-management.module";
+
+// Modules – defi
+import { DeFiModule } from "./defi/defi/defi.module";
+
+// Modules – growth
+import { AlertsModule } from "./growth/alerts/alerts.module";
 
 // Auth entities
-import { User } from "./user/entities/user.entity";
-import { EmailVerification } from "./auth/entities/email-verification.entity";
-import { Wallet } from "./auth/entities/wallet.entity";
+import { User } from "./core/user/entities/user.entity";
+import { EmailVerification } from "./core/auth/entities/email-verification.entity";
+import { Wallet } from "./core/auth/entities/wallet.entity";
 
 // Oracle entities
-import { SignedPayload } from "./oracle/entities/signed-payload.entity";
-import { SubmissionNonce } from "./oracle/entities/submission-nonce.entity";
+import { SignedPayload } from "./blockchain/oracle/entities/signed-payload.entity";
+import { SubmissionNonce } from "./blockchain/oracle/entities/submission-nonce.entity";
 
 // Audit entities
-import { AgentEvent } from "./audit/entities/agent-event.entity";
-import { ComputeResult } from "./audit/entities/compute-result.entity";
-import { ProvenanceRecord } from "./audit/entities/provenance-record.entity";
+import { AgentEvent } from "./infrastructure/audit/entities/agent-event.entity";
+import { ComputeResult } from "./infrastructure/audit/entities/compute-result.entity";
+import { ProvenanceRecord } from "./infrastructure/audit/entities/provenance-record.entity";
 
 // Portfolio entities
-import { Portfolio } from "./portfolio/entities/portfolio.entity";
-import { PortfolioAsset } from "./portfolio/entities/portfolio-asset.entity";
-import { RiskProfile } from "./portfolio/entities/risk-profile.entity";
-import { OptimizationHistory } from "./portfolio/entities/optimization-history.entity";
-import { RebalancingEvent } from "./portfolio/entities/rebalancing-event.entity";
-import { PerformanceMetric } from "./portfolio/entities/performance-metric.entity";
-import { BacktestResult } from "./portfolio/entities/backtest-result.entity";
+import { Portfolio } from "./investment/portfolio/entities/portfolio.entity";
+import { PortfolioAsset } from "./investment/portfolio/entities/portfolio-asset.entity";
+import { RiskProfile } from "./investment/portfolio/entities/risk-profile.entity";
+import { OptimizationHistory } from "./investment/portfolio/entities/optimization-history.entity";
+import { RebalancingEvent } from "./investment/portfolio/entities/rebalancing-event.entity";
+import { PerformanceMetric } from "./investment/portfolio/entities/performance-metric.entity";
+import { BacktestResult } from "./investment/portfolio/entities/backtest-result.entity";
 
 // DeFi entities
-import { DeFiPosition } from "./defi/entities/defi-position.entity";
-import { DeFiYieldRecord } from "./defi/entities/defi-yield-record.entity";
-import { DeFiTransaction } from "./defi/entities/defi-transaction.entity";
-import { DeFiYieldStrategy } from "./defi/entities/defi-yield-strategy.entity";
-import { DeFiRiskAssessment } from "./defi/entities/defi-risk-assessment.entity";
+import { DeFiPosition } from "./defi/defi/entities/defi-position.entity";
+import { DeFiYieldRecord } from "./defi/defi/entities/defi-yield-record.entity";
+import { DeFiTransaction } from "./defi/defi/entities/defi-transaction.entity";
+import { DeFiYieldStrategy } from "./defi/defi/entities/defi-yield-strategy.entity";
+import { DeFiRiskAssessment } from "./defi/defi/entities/defi-risk-assessment.entity";
 
 // Alerts entities
-import { Alert } from "./alerts/entities/alert.entity";
-import { AlertTriggerLog } from "./alerts/entities/alert-trigger-log.entity";
+import { Alert } from "./growth/alerts/entities/alert.entity";
+import { AlertTriggerLog } from "./growth/alerts/entities/alert-trigger-log.entity";
 
 // Guards
 import { ThrottlerUserIpGuard } from "./common/guard/throttler.guard";
 import { RolesGuard } from "./common/guard/roles.guard";
 import { KycGuard } from "./common/guard/kyc.guard";
-import { SubmissionVerifierService } from "./oracle/submission-verifier.service";
+import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifier.service";
 
 @Module({
   imports: [

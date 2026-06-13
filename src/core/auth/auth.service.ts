@@ -8,11 +8,10 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
-import { User } from "src/core/user/entities/user.entity";
 import { JwtService } from "@nestjs/jwt";
-import { LoginDto, RegisterDto } from "src/core/auth/dto/auth.dto";
-import { TokenBlacklistService } from "src/core/auth/token-blacklist.service";
-
+import { User } from "../user/entities/user.entity";
+import { RegisterDto, LoginDto } from "./dto/auth.dto";
+import { TokenBlacklistService } from "./token-blacklist.service";
 
 @Injectable()
 export class AuthService {
