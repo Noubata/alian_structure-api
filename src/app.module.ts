@@ -27,7 +27,7 @@ import { PortfolioModule } from "./investment/portfolio/portfolio.module";
 import { RiskManagementModule } from "./investment/risk-management/risk-management.module";
 
 // Modules – defi
-import { DeFiModule } from "./defi/defi/defi.module";
+import { DeFiModule } from "./defi/defi.module";
 
 // Modules – growth
 import { AlertsModule } from "./growth/alerts/alerts.module";
@@ -56,21 +56,23 @@ import { PerformanceMetric } from "./investment/portfolio/entities/performance-m
 import { BacktestResult } from "./investment/portfolio/entities/backtest-result.entity";
 
 // DeFi entities
-import { DeFiPosition } from "./defi/defi/entities/defi-position.entity";
-import { DeFiYieldRecord } from "./defi/defi/entities/defi-yield-record.entity";
-import { DeFiTransaction } from "./defi/defi/entities/defi-transaction.entity";
-import { DeFiYieldStrategy } from "./defi/defi/entities/defi-yield-strategy.entity";
-import { DeFiRiskAssessment } from "./defi/defi/entities/defi-risk-assessment.entity";
+import { DeFiPosition } from "./defi/entities/defi-position.entity";
+import { DeFiYieldRecord } from "./defi/entities/defi-yield-record.entity";
+import { DeFiTransaction } from "./defi/entities/defi-transaction.entity";
+import { DeFiYieldStrategy } from "./defi/entities/defi-yield-strategy.entity";
+import { DeFiRiskAssessment } from "./defi/entities/defi-risk-assessment.entity";
 
 // Alerts entities
 import { Alert } from "./growth/alerts/entities/alert.entity";
 import { AlertTriggerLog } from "./growth/alerts/entities/alert-trigger-log.entity";
+import { AlertPreference } from "./growth/alerts/entities/alert-preference.entity";
 
 // Guards
 import { APP_FILTER } from "@nestjs/core";
 import { ThrottlerUserIpGuard } from "./common/guard/throttler.guard";
 import { RolesGuard } from "./common/guard/roles.guard";
 import { KycGuard } from "./common/guard/kyc.guard";
+import { StrategyAuthGuard } from "./core/auth/guards/strategy-auth.guard";
 import { GlobalExceptionFilter } from "./common/filters/global-exception.filter";
 import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifier.service";
 
@@ -139,6 +141,7 @@ import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifi
             DeFiRiskAssessment,
             Alert,
             AlertTriggerLog,
+            AlertPreference,
           ],
           synchronize: !isProduction,
           logging: isProduction ? ["error"] : ["error", "warn", "schema"],
@@ -179,6 +182,10 @@ import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifi
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: StrategyAuthGuard,
     },
     {
       provide: APP_GUARD,
