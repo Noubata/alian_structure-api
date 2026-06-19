@@ -32,6 +32,9 @@ import { DeFiModule } from "./defi/defi/defi.module";
 // Modules – growth
 import { AlertsModule } from "./growth/alerts/alerts.module";
 
+// Modules – health
+import { HealthModule } from "./health/health.module";
+
 // Auth entities
 import { User } from "./core/user/entities/user.entity";
 import { EmailVerification } from "./core/auth/entities/email-verification.entity";
@@ -170,6 +173,7 @@ import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifi
     RiskManagementModule,
     DeFiModule,
     AlertsModule,
+    HealthModule,
   ],
 
   controllers: [AppController],
