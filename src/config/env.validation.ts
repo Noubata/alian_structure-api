@@ -33,6 +33,24 @@ export class EnvironmentVariables {
   LOG_LEVEL: string = "info";
 
   @IsOptional()
+  @IsString()
+  SENTRY_DSN?: string;
+
+  @IsOptional()
+  @IsString()
+  SENTRY_ENVIRONMENT?: string;
+
+  @IsOptional()
+  @IsString()
+  SENTRY_RELEASE?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => parseFloat(value))
+  @Min(0)
+  @Max(1)
+  SENTRY_TRACES_SAMPLE_RATE?: number = 0.1;
+
+  @IsOptional()
   @IsUrl()
   OTEL_EXPORTER_OTLP_ENDPOINT?: string;
 
@@ -80,4 +98,16 @@ export class EnvironmentVariables {
 
   @IsString()
   EMAIL_FROM: string = '"StellAIverse" <noreply@stellaiverse.com>';
+
+  // Redis
+  @IsOptional()
+  @IsString()
+  REDIS_URL?: string;
+
+  // Health check timeouts
+  @IsOptional()
+  @IsNumber()
+  @Min(100)
+  @Transform(({ value }) => (value ? parseInt(value, 10) : 5000))
+  HEALTH_CHECK_TIMEOUT_MS?: number;
 }
