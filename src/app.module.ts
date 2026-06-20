@@ -4,6 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { join } from "path";
 import { APP_GUARD } from "@nestjs/core";
 import { ThrottlerModule } from "@nestjs/throttler";
+import { EventEmitterModule } from "@nestjs/event-emitter";
 import { validate } from "class-validator";
 import { plainToInstance } from "class-transformer";
 import { EnvironmentVariables } from "./config/env.validation";
@@ -31,6 +32,9 @@ import { DeFiModule } from "./defi/defi.module";
 
 // Modules – growth
 import { AlertsModule } from "./growth/alerts/alerts.module";
+
+// Modules – health
+import { HealthModule } from "./health/health.module";
 
 // Auth entities
 import { User } from "./core/user/entities/user.entity";
@@ -155,6 +159,8 @@ import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifi
       },
     }),
 
+    EventEmitterModule.forRoot(),
+
     ThrottlerModule.forRoot({
       throttlers: [
         { name: 'global',  ttl: 60_000, limit: 100 },
@@ -173,6 +179,7 @@ import { SubmissionVerifierService } from "./blockchain/oracle/submission-verifi
     RiskManagementModule,
     DeFiModule,
     AlertsModule,
+    HealthModule,
   ],
 
   controllers: [AppController],

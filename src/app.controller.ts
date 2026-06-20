@@ -4,14 +4,13 @@ import {
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
-  ApiSecurity,
 } from "@nestjs/swagger";
 import { AppService } from "./app.service";
 import { RateLimit } from "./common/decorators/rate-limit.decorator";
 import { JwtAuthGuard } from "./core/auth/jwt.guard";
 import { Public } from "./common/decorators/public.decorator";
 
-@ApiTags("Health")
+@ApiTags("Info")
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
